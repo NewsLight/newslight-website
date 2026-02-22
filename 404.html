@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>News Light</title>
+    <title>NewsLight</title>
     <link rel="icon" href="/favicon.ico" />
 
-    <meta property="og:site_name" content="News Light" />
+    <meta property="og:site_name" content="NewsLight" />
     <meta property="og:type" content="article" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <script>
       tailwind.config = {
         theme: {
@@ -30,7 +30,7 @@
 
     <!-- Nav -->
     <nav class="max-w-5xl mx-auto px-6 py-8 flex items-center justify-between">
-      <a href="/" class="font-serif text-2xl font-bold tracking-tight hover:text-neutral-300 transition-colors">News Light</a>
+      <a href="/" class="text-2xl font-bold tracking-tight hover:text-neutral-300 transition-colors" style="font-family: 'Goudy Bookletter 1911', serif;">NewsLight</a>
     </nav>
 
     <!-- Content rendered by JS -->
@@ -38,7 +38,7 @@
 
     <!-- Footer -->
     <footer class="max-w-5xl mx-auto px-6 py-12 border-t border-neutral-800">
-      <p class="text-neutral-500 text-sm text-center">&copy; 2025 News Light. All rights reserved.</p>
+      <p class="text-neutral-500 text-sm text-center">&copy; 2026 NewsLight. All rights reserved.</p>
     </footer>
 
     <script>
@@ -54,7 +54,7 @@
         }
 
         function showNotFound() {
-          document.title = 'Page Not Found — News Light';
+          document.title = 'Page Not Found — NewsLight';
           document.getElementById('content').innerHTML =
             '<div class="text-center py-20">' +
               '<h1 class="font-serif text-5xl font-bold mb-4">Page Not Found</h1>' +
@@ -75,7 +75,7 @@
               '<p class="text-neutral-400 mt-4">Loading article…</p>' +
             '</div>';
 
-          // Deep link is triggered by the "Open in News Light" button, not auto-redirect
+          // Deep link is triggered by the "Open in NewsLight" button, not auto-redirect
 
           // Fetch article preview
           fetch(apiUrl, {
@@ -92,10 +92,10 @@
               var summary = article.summary || article.description || '';
               var city = cityObj.name || article.city_name || '';
 
-              document.title = headline + ' — News Light';
+              document.title = headline + ' — NewsLight';
 
               // Update OG tags dynamically (helps with some crawlers)
-              setMeta('og:title', headline + ' — News Light');
+              setMeta('og:title', headline + ' — NewsLight');
               if (summary) setMeta('og:description', summary);
               setMeta('og:url', window.location.href);
 
@@ -104,24 +104,24 @@
                   (city ? '<p class="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-4">' + escapeHtml(city) + '</p>' : '') +
                   '<h1 class="font-serif text-2xl md:text-3xl font-bold leading-tight mb-10 line-clamp-2">' + escapeHtml(headline.length > 60 ? headline.substring(0, 60) + '…' : headline) + '</h1>' +
                   '<div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 text-center mb-12">' +
-                    '<p class="text-neutral-400 mb-6">This article is available exclusively in the News Light app</p>' +
-                    '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in News Light</a>' +
+                    '<p class="text-neutral-400 mb-6">This article is available exclusively in the NewsLight app</p>' +
+                    '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in NewsLight</a>' +
                   '</div>' +
                   '<div class="text-center">' +
                     '<h2 class="font-serif text-2xl font-bold mb-3">Download the App</h2>' +
-                    '<p class="text-neutral-400 mb-6">Get the full story and more local news in News Light.</p>' +
+                    '<p class="text-neutral-400 mb-6">Get the full story and more local news in NewsLight.</p>' +
                     '<a href="#" class="inline-block bg-white text-neutral-950 font-semibold text-sm px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Download on the App Store</a>' +
                   '</div>' +
                 '</article>';
             })
             .catch(function () {
-              document.title = 'Article — News Light';
+              document.title = 'Article — NewsLight';
               document.getElementById('content').innerHTML =
                 '<div class="py-8 text-center">' +
-                  '<h1 class="font-serif text-3xl md:text-4xl font-bold mb-4">Read This Article in News Light</h1>' +
-                  '<p class="text-neutral-400 text-lg mb-8">This article is available exclusively in the News Light app.</p>' +
+                  '<h1 class="font-serif text-3xl md:text-4xl font-bold mb-4">Read This Article in NewsLight</h1>' +
+                  '<p class="text-neutral-400 text-lg mb-8">This article is available exclusively in the NewsLight app.</p>' +
                   '<div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 mb-12">' +
-                    '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in News Light</a>' +
+                    '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in NewsLight</a>' +
                   '</div>' +
                   '<div>' +
                     '<h2 class="font-serif text-2xl font-bold mb-3">Download the App</h2>' +
