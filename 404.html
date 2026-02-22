@@ -75,10 +75,7 @@
               '<p class="text-neutral-400 mt-4">Loading article…</p>' +
             '</div>';
 
-          // Attempt deep link after a short delay
-          setTimeout(function () {
-            window.location.href = deepLink;
-          }, 1500);
+          // Deep link is triggered by the "Open in News Light" button, not auto-redirect
 
           // Fetch article preview
           fetch(apiUrl, {
@@ -88,10 +85,12 @@
               if (!res.ok) throw new Error('Not found');
               return res.json();
             })
-            .then(function (article) {
+            .then(function (json) {
+              var article = (json.data && json.data.article) || json;
+              var cityObj = (json.data && json.data.city) || {};
               var headline = article.headline || article.title || 'Untitled Article';
               var summary = article.summary || article.description || '';
-              var city = article.city_name || article.city || '';
+              var city = cityObj.name || article.city_name || '';
 
               document.title = headline + ' — News Light';
 
