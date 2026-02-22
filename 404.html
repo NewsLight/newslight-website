@@ -102,8 +102,7 @@
               document.getElementById('content').innerHTML =
                 '<article class="py-8">' +
                   (city ? '<p class="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-4">' + escapeHtml(city) + '</p>' : '') +
-                  '<h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-6">' + escapeHtml(headline) + '</h1>' +
-                  (summary ? '<p class="text-lg text-neutral-400 leading-relaxed mb-10">' + escapeHtml(summary) + '</p>' : '') +
+                  '<h1 class="font-serif text-2xl md:text-3xl font-bold leading-tight mb-10 line-clamp-2">' + escapeHtml(headline.length > 60 ? headline.substring(0, 60) + '…' : headline) + '</h1>' +
                   '<div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 text-center mb-12">' +
                     '<p class="text-neutral-400 mb-6">This article is available exclusively in the News Light app</p>' +
                     '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in News Light</a>' +
