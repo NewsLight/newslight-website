@@ -3,26 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Newslight — Your Community, Brought to Light</title>
-    <meta name="description" content="Authentic local news powered by AI. Newslight brings everything happening in your neighborhood into one seamless feed. Join the waitlist." />
+    <title>News Light — Your Community, Brought to Light</title>
+    <meta name="description" content="Authentic local news powered by AI. Everything happening in your neighborhood, in one seamless feed." />
     <meta name="keywords" content="local news, community news, AI journalism, neighborhood updates" />
     <link rel="canonical" href="https://newslight.com" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    
+    <link rel="icon" href="/favicon.ico" />
+
     <!-- Open Graph -->
-    <meta property="og:title" content="Newslight — Your Community, Brought to Light" />
-    <meta property="og:description" content="Authentic local news powered by AI. Dedicated to everything happening in your neighborhood." />
+    <meta property="og:title" content="News Light — Your Community, Brought to Light" />
+    <meta property="og:description" content="Authentic local news powered by AI. Everything happening in your neighborhood, in one seamless feed." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://newslight.com" />
-    
+    <meta property="og:site_name" content="News Light" />
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Newslight — Your Community, Brought to Light" />
-    <meta name="twitter:description" content="Authentic local news powered by AI. Dedicated to everything happening in your neighborhood." />
-    <script defer crossorigin src="/assets/index-DEj9tEWt.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-9a5RZE_f.css">
+    <meta name="twitter:title" content="News Light — Your Community, Brought to Light" />
+    <meta name="twitter:description" content="Authentic local news powered by AI. Everything happening in your neighborhood, in one seamless feed." />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['Playfair Display', 'Georgia', 'serif'],
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="bg-neutral-950 text-white min-h-screen font-sans antialiased">
+
+    <!-- Nav -->
+    <nav class="max-w-5xl mx-auto px-6 py-8 flex items-center justify-between">
+      <span class="font-serif text-2xl font-bold tracking-tight">News Light</span>
+      <a href="#download" class="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Download</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="max-w-3xl mx-auto px-6 pt-20 pb-28 text-center">
+      <h1 class="font-serif text-5xl md:text-7xl font-900 leading-tight tracking-tight mb-6">
+        Your Community,<br />Brought to Light
+      </h1>
+      <p class="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+        Authentic local news powered by AI. Everything happening in your neighborhood, in one seamless feed.
+      </p>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-5xl mx-auto px-6">
+      <hr class="border-neutral-800" />
+    </div>
+
+    <!-- Features -->
+    <section class="max-w-5xl mx-auto px-6 py-24">
+      <div class="grid md:grid-cols-3 gap-12 md:gap-8">
+
+        <div>
+          <h3 class="font-serif text-2xl font-bold mb-3">Hyper-Local Coverage</h3>
+          <p class="text-neutral-400 leading-relaxed">
+            News from your exact neighborhood — not a city over. We surface what matters most within blocks of where you live.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-serif text-2xl font-bold mb-3">AI-Powered Summaries</h3>
+          <p class="text-neutral-400 leading-relaxed">
+            Get the full picture in seconds. Our AI distills local stories into clear, concise summaries so you stay informed without the noise.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-serif text-2xl font-bold mb-3">Illuminate Context</h3>
+          <p class="text-neutral-400 leading-relaxed">
+            Understand the why behind the what. Every story connects to the bigger picture in your community with rich, linked context.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-5xl mx-auto px-6">
+      <hr class="border-neutral-800" />
+    </div>
+
+    <!-- Download CTA -->
+    <section id="download" class="max-w-3xl mx-auto px-6 py-24 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Get News Light</h2>
+      <p class="text-neutral-400 mb-10 text-lg">Available on iOS. Your neighborhood is waiting.</p>
+      <a href="#" class="inline-block bg-white text-neutral-950 font-semibold text-sm px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">
+        Download on the App Store
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="max-w-5xl mx-auto px-6 py-12 border-t border-neutral-800">
+      <p class="text-neutral-500 text-sm text-center">&copy; 2025 News Light. All rights reserved.</p>
+    </footer>
+
   </body>
 </html>
