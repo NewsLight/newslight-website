@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NewsLight — Your Community, Brought to Light</title>
     <meta name="description" content="Authentic local news. Everything happening in your neighborhood, in one seamless feed." />
     <meta name="keywords" content="local news, community news, neighborhood updates, local journalism" />
-    <link rel="canonical" href="https://newslight.com" />
+    <link rel="canonical" href="https://www.newslight.com/" />
     <link rel="icon" href="/favicon.ico" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="NewsLight — Your Community, Brought to Light" />
     <meta property="og:description" content="Authentic local news. Everything happening in your neighborhood, in one seamless feed." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://newslight.com" />
+    <meta property="og:url" content="https://www.newslight.com/" />
     <meta property="og:site_name" content="NewsLight" />
-    <meta property="og:image" content="https://newslight.com/icon.png" />
+    <meta property="og:image" content="https://www.newslight.com/newslight-splash-blue.png" />
     <meta property="og:image:width" content="1024" />
     <meta property="og:image:height" content="1024" />
 
@@ -23,12 +23,12 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NewsLight — Your Community, Brought to Light" />
     <meta name="twitter:description" content="Authentic local news. Everything happening in your neighborhood, in one seamless feed." />
-    <meta name="twitter:image" content="https://newslight.com/icon.png" />
+    <meta name="twitter:image" content="https://www.newslight.com/newslight-splash-blue.png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <script>
       tailwind.config = {
         theme: {
@@ -36,59 +36,68 @@
             fontFamily: {
               serif: ['Playfair Display', 'Georgia', 'serif'],
               sans: ['Inter', 'system-ui', 'sans-serif'],
+              brand: ['Montserrat', 'system-ui', 'sans-serif'],
             },
           },
         },
       };
     </script>
   </head>
-  <body class="bg-neutral-950 text-white min-h-screen font-sans antialiased">
+  <body class="min-h-screen font-sans antialiased text-white bg-gradient-to-b from-[#0a1628] via-[#0f4a6b] to-[#2ec8e8]">
 
-    <!-- Nav -->
-    <nav class="max-w-5xl mx-auto px-6 py-8 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="/icon.png" alt="NewsLight" class="w-8 h-8 rounded-lg" />
-        <span class="text-2xl font-bold tracking-tight" style="font-family: 'Goudy Bookletter 1911', serif;">NewsLight</span>
-      </div>
-      <a href="#download" class="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Download</a>
-    </nav>
+    <!-- Nav (sticky) -->
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a1628]/85 backdrop-blur-md shadow-sm">
+      <nav class="mx-auto flex w-full max-w-[1800px] items-center justify-between gap-2 px-4 py-4 sm:gap-4 sm:px-6 sm:py-5 md:px-10 lg:px-14 xl:px-20">
+        <a href="/" class="flex min-w-0 items-center gap-2 sm:gap-3 hover:opacity-90 transition-opacity">
+          <div class="flex h-16 w-16 shrink-0 items-center justify-center p-2 sm:h-20 sm:w-20 sm:p-3">
+            <img src="/newslight-logo.jpeg" alt="" class="max-h-full max-w-full object-contain rounded-none" />
+          </div>
+          <span class="font-brand truncate text-lg tracking-tight sm:text-xl md:text-2xl"><span class="font-bold">News</span><span class="font-light">Light</span></span>
+        </a>
+        <div class="flex shrink-0 flex-wrap items-center justify-end gap-x-3 gap-y-1 sm:gap-x-5 md:gap-x-6">
+          <a href="#top" class="text-sm font-medium text-white/75 hover:text-white transition-colors">About</a>
+          <a href="#download" class="text-sm font-medium text-white/75 hover:text-white transition-colors">Download</a>
+          <a href="#contact" class="text-sm font-medium text-white/75 hover:text-white transition-colors">Contact</a>
+        </div>
+      </nav>
+    </header>
 
     <!-- Hero -->
-    <section class="max-w-3xl mx-auto px-6 pt-20 pb-28 text-center">
+    <section id="top" class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 pt-12 md:pt-20 pb-28 text-center scroll-mt-28">
       <h1 class="font-serif text-5xl md:text-7xl font-900 leading-tight tracking-tight mb-6">
         Your Community,<br />Brought to Light
       </h1>
-      <p class="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
         Authentic local news. Everything happening in your neighborhood, in one seamless feed.
       </p>
     </section>
 
     <!-- Divider -->
-    <div class="max-w-5xl mx-auto px-6">
-      <hr class="border-neutral-800" />
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20">
+      <hr class="border-white/15" />
     </div>
 
     <!-- Features -->
-    <section class="max-w-5xl mx-auto px-6 py-24">
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 py-24">
       <div class="grid md:grid-cols-3 gap-12 md:gap-8">
 
         <div>
           <h3 class="font-serif text-2xl font-bold mb-3">Hyper-Local Coverage</h3>
-          <p class="text-neutral-400 leading-relaxed">
+          <p class="text-white/80 leading-relaxed">
             News from your exact neighborhood — not a city over. We surface what matters most within blocks of where you live.
           </p>
         </div>
 
         <div>
           <h3 class="font-serif text-2xl font-bold mb-3">Clear Summaries</h3>
-          <p class="text-neutral-400 leading-relaxed">
+          <p class="text-white/80 leading-relaxed">
             Get the full picture in seconds. Local stories distilled into clear, concise summaries so you stay informed without the noise.
           </p>
         </div>
 
         <div>
           <h3 class="font-serif text-2xl font-bold mb-3">Share What Matters</h3>
-          <p class="text-neutral-400 leading-relaxed">
+          <p class="text-white/80 leading-relaxed">
             Found something your neighbors should know? Share stories instantly with your community through any platform.
           </p>
         </div>
@@ -97,30 +106,106 @@
     </section>
 
     <!-- Divider -->
-    <div class="max-w-5xl mx-auto px-6">
-      <hr class="border-neutral-800" />
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20">
+      <hr class="border-white/15" />
     </div>
 
-    <!-- Download CTA -->
-    <section id="download" class="max-w-3xl mx-auto px-6 py-24 text-center">
+    <!-- Download (Coming Soon) -->
+    <section id="download" class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 py-24 text-center scroll-mt-28">
       <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Coming Soon</h2>
-      <p class="text-neutral-400 mb-10 text-lg">NewsLight is launching soon on iOS. Your neighborhood is waiting.</p>
-      <div class="inline-flex items-center gap-2 bg-neutral-900 border border-neutral-700 text-neutral-300 font-semibold text-sm px-8 py-4 rounded-full">
+      <p class="text-white/80 mb-10 text-lg">NewsLight is launching soon on iOS. Your neighborhood is waiting.</p>
+      <div class="inline-flex items-center gap-2 bg-black/20 backdrop-blur-sm border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full shadow-lg shadow-black/10">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Coming to the App Store
       </div>
     </section>
 
+    <!-- Divider -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20">
+      <hr class="border-white/15" />
+    </div>
+
+    <!-- Contact -->
+    <section id="contact" class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 py-24 scroll-mt-28">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Contact</h2>
+      <p class="text-white/80 leading-relaxed mb-8">
+        Questions, feedback, or support? Send us a message below. Submissions are delivered to <a href="mailto:contact@newslight.com" class="text-white underline hover:text-white/90">contact@newslight.com</a>.
+      </p>
+
+      <div id="contact-sent" class="hidden mb-8 rounded-xl bg-white/15 border border-white/30 px-4 py-3 text-white text-sm" role="status">
+        Thanks — your message was sent. We’ll get back to you if a reply is needed.
+      </div>
+
+      <form
+        action="https://formsubmit.co/contact@newslight.com"
+        method="POST"
+        class="space-y-6"
+      >
+        <input type="hidden" name="_subject" value="NewsLight website contact" />
+        <input type="hidden" name="_next" value="https://www.newslight.com/?contact=sent#contact" />
+        <input type="hidden" name="_captcha" value="false" />
+
+        <div>
+          <label for="contact-email" class="block text-sm font-medium text-white/90 mb-2">Your email <span class="text-white/55 font-normal">(optional, for replies)</span></label>
+          <input
+            type="email"
+            id="contact-email"
+            name="email"
+            autocomplete="email"
+            class="w-full rounded-lg bg-black/25 border border-white/30 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
+            placeholder="you@example.com"
+          />
+        </div>
+
+        <div>
+          <label for="contact-message" class="block text-sm font-medium text-white/90 mb-2">Message</label>
+          <textarea
+            id="contact-message"
+            name="message"
+            required
+            rows="8"
+            class="w-full rounded-lg bg-black/25 border border-white/30 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 resize-y min-h-[200px]"
+            placeholder="Type your message here…"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="inline-flex items-center justify-center rounded-full bg-white text-neutral-950 font-semibold text-sm px-8 py-3 hover:bg-neutral-200 transition-colors"
+        >
+          Submit
+        </button>
+      </form>
+    </section>
+
     <!-- Footer -->
-    <footer class="max-w-5xl mx-auto px-6 py-12 border-t border-neutral-800">
+    <footer class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 py-12 border-t border-white/15">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-neutral-500 text-sm">&copy; 2026 NewsLight. All rights reserved.</p>
+        <p class="text-white/55 text-sm">&copy; 2026 NewsLight. All rights reserved.</p>
         <div class="flex gap-6">
-          <a href="/terms" class="text-neutral-500 text-sm hover:text-white transition-colors">Terms</a>
-          <a href="/privacy" class="text-neutral-500 text-sm hover:text-white transition-colors">Privacy</a>
+          <a href="/terms" class="text-white/55 text-sm hover:text-white transition-colors">Terms</a>
+          <a href="/privacy" class="text-white/55 text-sm hover:text-white transition-colors">Privacy</a>
+          <a href="#contact" class="text-white/55 text-sm hover:text-white transition-colors">Contact</a>
         </div>
       </div>
     </footer>
 
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('contact') !== 'sent') return;
+        var banner = document.getElementById('contact-sent');
+        var section = document.getElementById('contact');
+        if (banner) banner.classList.remove('hidden');
+        if (section) {
+          requestAnimationFrame(function () {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        }
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', '/#contact');
+        }
+      })();
+    </script>
   </body>
 </html>
