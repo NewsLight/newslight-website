@@ -139,7 +139,7 @@
       </div>
     </footer>
 
-    <!-- Shared article links: /article/{uuid} → web preview (404.html on static hosts). "Open in NewsLight" uses the HTTPS Universal Link (/.well-known/apple-app-site-association → /article/*), then App Store if the app does not open. -->
+    <!-- Shared article links: /article/{uuid} → web preview (404.html on static hosts). "Open in NewsLight" tries the Universal Link in a hidden iframe (avoids same-tab reload that cancels the App Store fallback), then same-tab App Store if the app does not take focus. -->
     <script>
       (function () {
         var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -181,7 +181,7 @@
               '<p class="text-white/80 mt-4">Loading article…</p>' +
             '</div>';
 
-          // "Open in NewsLight": navigate to Universal Link so iOS can open the app; if not installed, same-origin page then App Store fallback
+          // "Open in NewsLight": try Universal Link in a hidden iframe (main window must NOT assign same-origin URL or the page reloads and the App Store timer never runs).
 
           // Fetch article preview
           fetch(apiUrl, {
@@ -214,7 +214,7 @@
                     : '') +
                   '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-center">' +
                     '<p class="text-white/80 mb-6">Read the full story in the NewsLight app.</p>' +
-                    '<a href="' + appStoreUrl + '" id="nl-article-open-btn" data-app-link="' + universalOpenLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Open in NewsLight</a>' +
+                    '<a href="' + appStoreUrl + '" id="nl-article-open-btn" data-app-link="' + universalOpenLink + '" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Open in NewsLight</a>' +
                   '</div>' +
                 '</article>';
               wireArticleOpenButton();
@@ -226,7 +226,7 @@
                   '<h1 class="font-serif text-3xl md:text-4xl font-bold mb-4">Read This Article in NewsLight</h1>' +
                   '<p class="text-white/80 text-lg mb-8">This article is available exclusively in the NewsLight app.</p>' +
                   '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8">' +
-                    '<a href="' + appStoreUrl + '" id="nl-article-open-btn" data-app-link="' + universalOpenLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Open in NewsLight</a>' +
+                    '<a href="' + appStoreUrl + '" id="nl-article-open-btn" data-app-link="' + universalOpenLink + '" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Open in NewsLight</a>' +
                   '</div>' +
                 '</div>';
               wireArticleOpenButton();
@@ -243,23 +243,23 @@
             if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
             e.preventDefault();
             var appOpened = false;
-            function markAppOpened() {
-              appOpened = true;
-            }
             function onVisibility() {
-              if (document.visibilityState === 'hidden') markAppOpened();
+              if (document.visibilityState === 'hidden') appOpened = true;
             }
             document.addEventListener('visibilitychange', onVisibility);
-            window.addEventListener('pagehide', markAppOpened);
-            window.addEventListener('blur', markAppOpened);
-            // Universal Link (https://…/article/{uuid}) — opens the app when installed (Associated Domains)
-            window.location.assign(appLink);
-            // 2) If we are still here and the window did not hand off to the app, go to the App Store
-            var fallbackMs = 2500;
+            // Same-tab assign() to the article URL reloads this page and kills this script — use a
+            // hidden iframe so the App Store fallback timer still runs when the app is not installed.
+            var iframe = document.createElement('iframe');
+            iframe.setAttribute('title', 'NewsLight app handoff');
+            iframe.setAttribute('style', 'position:fixed;width:1px;height:1px;border:0;opacity:0;pointer-events:none;bottom:0;right:0');
+            iframe.setAttribute('src', appLink);
+            document.body.appendChild(iframe);
+            var fallbackMs = 2200;
             setTimeout(function () {
+              try {
+                if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+              } catch (err) {}
               document.removeEventListener('visibilitychange', onVisibility);
-              window.removeEventListener('pagehide', markAppOpened);
-              window.removeEventListener('blur', markAppOpened);
               if (!appOpened) window.location.assign(store);
             }, fallbackMs);
           });
