@@ -247,10 +247,12 @@
           aria-hidden="true"
         ></div>
 
-        <div class="relative grid gap-10 sm:gap-12 lg:grid-cols-12 lg:items-start lg:gap-x-8 lg:gap-y-0 xl:gap-x-12 2xl:gap-x-14">
+        <div
+          class="relative grid grid-cols-1 gap-x-0 gap-y-24 sm:gap-y-12 lg:grid-cols-12 lg:items-start lg:gap-x-8 lg:gap-y-0 xl:gap-x-12 2xl:gap-x-14"
+        >
         <!-- Copy + CTAs -->
         <div class="min-w-0 text-center lg:col-span-7 lg:pt-1 lg:text-left">
-          <div class="mb-6 flex flex-wrap items-center justify-center gap-2 sm:mb-8 lg:justify-start">
+          <div class="mb-10 flex flex-wrap items-center justify-center gap-2 sm:mb-8 lg:justify-start">
             <span
               class="nl-hero-bento inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/90 backdrop-blur-md sm:gap-2.5 sm:px-3.5 sm:text-[11px] sm:tracking-[0.16em]"
             >
@@ -274,7 +276,7 @@
           </h1>
 
           <p
-            class="mx-auto mt-6 max-w-[36rem] text-sm leading-relaxed text-white/75 sm:mt-8 sm:text-base sm:leading-relaxed md:text-lg lg:mx-0 lg:max-w-[34rem] lg:text-lg xl:max-w-xl xl:text-xl xl:leading-relaxed"
+            class="mx-auto mt-10 max-w-[36rem] text-sm leading-relaxed text-white/75 sm:mt-8 sm:text-base sm:leading-relaxed md:text-lg lg:mx-0 lg:max-w-[34rem] lg:text-lg xl:max-w-xl xl:text-xl xl:leading-relaxed"
           >
             Authentic local news for where you live — clear, calm, and close to home. One feed that actually fits your block, not the whole internet.
           </p>
@@ -306,8 +308,10 @@
           <p class="mt-5 text-center text-xs text-white/40 sm:mt-6 sm:text-sm lg:text-left">Free on iPhone · Opens the Canadian App Store</p>
         </div>
 
-        <!-- Bento rail -->
-        <div class="mx-auto w-full max-w-[min(100%,22rem)] sm:max-w-md lg:col-span-5 lg:mx-0 lg:max-w-none lg:pt-2">
+        <!-- Bento rail (extra hero separation: base width only, below Tailwind sm) -->
+        <div
+          class="mx-auto w-full max-w-[min(100%,22rem)] border-t border-white/10 pt-10 sm:border-t-0 sm:pt-0 sm:max-w-md lg:col-span-5 lg:mx-0 lg:max-w-none lg:pt-2"
+        >
           <div class="grid gap-3.5 sm:gap-4 md:gap-5">
             <div class="nl-hero-bento rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-md sm:rounded-3xl sm:p-6 md:p-7">
               <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-[11px] sm:tracking-[0.2em]">Product</p>
@@ -336,7 +340,7 @@
         </div>
       </div>
 
-        <div class="mt-auto flex justify-center pt-8 sm:pt-10">
+        <div class="mt-auto hidden justify-center pt-8 sm:flex sm:pt-10">
           <a
             href="#features"
             class="nl-hero-bento flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/70 backdrop-blur-md transition hover:border-[#2ec8e8]/40 hover:bg-white/[0.1] hover:text-white motion-reduce:transition-none sm:h-12 sm:w-12"
