@@ -68,7 +68,7 @@
       </div>
     </footer>
 
-    <!-- Shared article links: /article/{uuid} → web preview + "Open in NewsLight" + App Store (404.html is the entry on static hosts). Do not remove this script. -->
+    <!-- Shared article links: /article/{uuid} → web preview (404.html on static hosts). "Open in NewsLight" calls the app URL first; if the app does not take over, redirects to the App Store (href is the store for no-JS / modifier-click). -->
     <script>
       (function () {
         var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -93,6 +93,7 @@
 
         function showArticlePage(uuid) {
           var deepLink = 'newslight://app/news/' + uuid;
+          var appStoreUrl = 'https://apps.apple.com/ca/app/newslight/id6758728521';
           var apiUrl = 'https://skykbtnscepbkerzcqlq.supabase.co/functions/v1/news/articles/' + uuid + '/preview';
           var apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNreWtidG5zY2VwYmtlcnpjcWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3OTE3ODYsImV4cCI6MjA4MjM2Nzc4Nn0.I9Uk1M_Hc3V5LPsbYmZMqDjkl1qfDvR7pqXcMtZqmpo';
 
@@ -103,7 +104,7 @@
               '<p class="text-white/80 mt-4">Loading article…</p>' +
             '</div>';
 
-          // Deep link is triggered by the "Open in NewsLight" button, not auto-redirect
+          // "Open in NewsLight": open app via custom URL first; if the page stays active (no app), send to App Store
 
           // Fetch article preview
           fetch(apiUrl, {
@@ -131,16 +132,12 @@
                 '<article class="py-8">' +
                   (city ? '<p class="text-sm font-medium text-white/55 uppercase tracking-wider mb-4">' + escapeHtml(city) + '</p>' : '') +
                   '<h1 class="font-serif text-2xl md:text-3xl font-bold leading-tight mb-10 line-clamp-2">' + escapeHtml(headline.length > 60 ? headline.substring(0, 60) + '…' : headline) + '</h1>' +
-                  '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-center mb-12">' +
+                  '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-center">' +
                     '<p class="text-white/80 mb-6">This article is available exclusively in the NewsLight app</p>' +
-                    '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in NewsLight</a>' +
-                  '</div>' +
-                  '<div class="text-center">' +
-                    '<h2 class="font-serif text-2xl font-bold mb-3">Get NewsLight</h2>' +
-                    '<p class="text-white/80 mb-6">Available on the App Store for iPhone.</p>' +
-                    '<a href="https://apps.apple.com/ca/app/newslight/id6758728521" target="_blank" rel="noopener noreferrer" class="inline-block bg-black/25 border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full hover:border-white/40 hover:bg-black/35 transition-colors">Download on the App Store</a>' +
+                    '<a href="' + appStoreUrl + '" id="nl-article-open-btn" data-deep-link="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Open in NewsLight</a>' +
                   '</div>' +
                 '</article>';
+              wireArticleOpenButton();
             })
             .catch(function () {
               document.title = 'Article — NewsLight';
@@ -148,16 +145,44 @@
                 '<div class="py-8 text-center">' +
                   '<h1 class="font-serif text-3xl md:text-4xl font-bold mb-4">Read This Article in NewsLight</h1>' +
                   '<p class="text-white/80 text-lg mb-8">This article is available exclusively in the NewsLight app.</p>' +
-                  '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 mb-12">' +
-                    '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in NewsLight</a>' +
-                  '</div>' +
-                  '<div>' +
-                    '<h2 class="font-serif text-2xl font-bold mb-3">Get NewsLight</h2>' +
-                    '<p class="text-white/80 mb-6">Available on the App Store for iPhone.</p>' +
-                    '<a href="https://apps.apple.com/ca/app/newslight/id6758728521" target="_blank" rel="noopener noreferrer" class="inline-block bg-black/25 border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full hover:border-white/40 hover:bg-black/35 transition-colors">Download on the App Store</a>' +
+                  '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8">' +
+                    '<a href="' + appStoreUrl + '" id="nl-article-open-btn" data-deep-link="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Open in NewsLight</a>' +
                   '</div>' +
                 '</div>';
+              wireArticleOpenButton();
             });
+        }
+
+        function wireArticleOpenButton() {
+          var btn = document.getElementById('nl-article-open-btn');
+          if (!btn) return;
+          var store = btn.getAttribute('href');
+          var deep = btn.getAttribute('data-deep-link');
+          if (!store || !deep) return;
+          btn.addEventListener('click', function (e) {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+            e.preventDefault();
+            var appOpened = false;
+            function markAppOpened() {
+              appOpened = true;
+            }
+            function onVisibility() {
+              if (document.visibilityState === 'hidden') markAppOpened();
+            }
+            document.addEventListener('visibilitychange', onVisibility);
+            window.addEventListener('pagehide', markAppOpened);
+            window.addEventListener('blur', markAppOpened);
+            // 1) Try native app first (custom URL scheme)
+            window.location.assign(deep);
+            // 2) If we are still here and the window did not hand off to the app, go to the App Store
+            var fallbackMs = 2500;
+            setTimeout(function () {
+              document.removeEventListener('visibilitychange', onVisibility);
+              window.removeEventListener('pagehide', markAppOpened);
+              window.removeEventListener('blur', markAppOpened);
+              if (!appOpened) window.location.assign(store);
+            }, fallbackMs);
+          });
         }
 
         function escapeHtml(str) {
