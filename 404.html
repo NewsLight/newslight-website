@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet" />
     <script>
       tailwind.config = {
         theme: {
@@ -26,14 +26,14 @@
             fontFamily: {
               serif: ['Playfair Display', 'Georgia', 'serif'],
               sans: ['Inter', 'system-ui', 'sans-serif'],
-              brand: ['Montserrat', 'system-ui', 'sans-serif'],
+              brand: ['Inter', 'system-ui', 'sans-serif'],
             },
           },
         },
       };
     </script>
   </head>
-  <body class="min-h-screen font-sans antialiased text-white bg-gradient-to-b from-[#0a1628] via-[#0f4a6b] to-[#2ec8e8]">
+  <body class="min-h-screen bg-[linear-gradient(to_bottom,_#0a1628_0%,_#0b2038_22%,_#0f4a6b_48%,_#127090_66%,_#1c9cb8_82%,_#26b6d6_94%,_#29bddf_100%)] font-sans antialiased text-white">
 
     <!-- Nav (sticky) -->
     <header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a1628]/85 backdrop-blur-md shadow-sm">
@@ -45,7 +45,8 @@
           <span class="font-brand truncate text-lg tracking-tight sm:text-xl md:text-2xl"><span class="font-bold">News</span><span class="font-light">Light</span></span>
         </a>
         <div class="flex shrink-0 flex-wrap items-center justify-end gap-x-3 gap-y-1 sm:gap-x-5 md:gap-x-6">
-          <a href="/#top" class="text-sm font-medium text-white/75 hover:text-white transition-colors">About</a>
+          <a href="/#top" class="text-sm font-medium text-white/75 hover:text-white transition-colors">Home</a>
+          <a href="/#features" class="text-sm font-medium text-white/75 hover:text-white transition-colors">Features</a>
           <a href="/#download" class="text-sm font-medium text-white/75 hover:text-white transition-colors">Download</a>
           <a href="/#contact" class="text-sm font-medium text-white/75 hover:text-white transition-colors">Contact</a>
         </div>
@@ -67,6 +68,7 @@
       </div>
     </footer>
 
+    <!-- Shared article links: /article/{uuid} → web preview + "Open in NewsLight" + App Store (404.html is the entry on static hosts). Do not remove this script. -->
     <script>
       (function () {
         var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -134,9 +136,9 @@
                     '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in NewsLight</a>' +
                   '</div>' +
                   '<div class="text-center">' +
-                    '<h2 class="font-serif text-2xl font-bold mb-3">Coming Soon</h2>' +
-                    '<p class="text-white/80 mb-6">NewsLight is launching soon. Stay tuned.</p>' +
-                    '<span class="inline-block bg-black/25 border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full">Coming to the App Store</span>' +
+                    '<h2 class="font-serif text-2xl font-bold mb-3">Get NewsLight</h2>' +
+                    '<p class="text-white/80 mb-6">Available on the App Store for iPhone.</p>' +
+                    '<a href="https://apps.apple.com/ca/app/newslight/id6758728521" target="_blank" rel="noopener noreferrer" class="inline-block bg-black/25 border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full hover:border-white/40 hover:bg-black/35 transition-colors">Download on the App Store</a>' +
                   '</div>' +
                 '</article>';
             })
@@ -150,9 +152,9 @@
                     '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in NewsLight</a>' +
                   '</div>' +
                   '<div>' +
-                    '<h2 class="font-serif text-2xl font-bold mb-3">Coming Soon</h2>' +
-                    '<p class="text-white/80 mb-6">Get local news, powered by AI.</p>' +
-                    '<span class="inline-block bg-black/25 border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full">Coming to the App Store</span>' +
+                    '<h2 class="font-serif text-2xl font-bold mb-3">Get NewsLight</h2>' +
+                    '<p class="text-white/80 mb-6">Available on the App Store for iPhone.</p>' +
+                    '<a href="https://apps.apple.com/ca/app/newslight/id6758728521" target="_blank" rel="noopener noreferrer" class="inline-block bg-black/25 border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full hover:border-white/40 hover:bg-black/35 transition-colors">Download on the App Store</a>' +
                   '</div>' +
                 '</div>';
             });
