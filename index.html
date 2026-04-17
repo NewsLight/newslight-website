@@ -11,13 +11,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=13" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=14" />
     <title>NewsLight — Your Community, Brought to Light</title>
-    <meta name="description" content="Authentic local news. Everything happening in your neighborhood, in one seamless feed." />
+    <meta name="description" content="Authentic local news for your neighborhood. Download NewsLight on the App Store for iPhone — your community, in one seamless feed." />
     <meta name="keywords" content="local news, community news, neighborhood updates, local journalism" />
     <link rel="canonical" href="https://www.newslight.com/" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="NewsLight — Your Community, Brought to Light" />
-    <meta property="og:description" content="Authentic local news. Everything happening in your neighborhood, in one seamless feed." />
+    <meta property="og:description" content="Authentic local news for your neighborhood. Download NewsLight on the App Store for iPhone — your community, in one seamless feed." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.newslight.com/" />
     <meta property="og:site_name" content="NewsLight" />
@@ -28,17 +28,133 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NewsLight — Your Community, Brought to Light" />
-    <meta name="twitter:description" content="Authentic local news. Everything happening in your neighborhood, in one seamless feed." />
+    <meta name="twitter:description" content="Authentic local news for your neighborhood. Download NewsLight on the App Store for iPhone — your community, in one seamless feed." />
     <meta name="twitter:image" content="https://www.newslight.com/brand-logo.png" />
 
     <script type="application/ld+json">
-      {"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"NewsLight","url":"https://www.newslight.com/"},{"@type":"Organization","name":"NewsLight","url":"https://www.newslight.com/","logo":{"@type":"ImageObject","url":"https://www.newslight.com/icon.png"}}]}
+      {"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"NewsLight","url":"https://www.newslight.com/"},{"@type":"Organization","name":"NewsLight","url":"https://www.newslight.com/","logo":{"@type":"ImageObject","url":"https://www.newslight.com/icon.png"}},{"@type":"MobileApplication","name":"NewsLight","operatingSystem":"iOS","applicationCategory":"NewsApplication","url":"https://apps.apple.com/ca/app/newslight/id6758728521","offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}]}
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet" />
+    <style>
+      @keyframes nl-drift-a {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(8%, 6%) scale(1.08);
+        }
+      }
+      @keyframes nl-drift-b {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(-10%, -8%) scale(1.06);
+        }
+      }
+      .nl-blob-a {
+        animation: nl-drift-a 22s ease-in-out infinite;
+      }
+      .nl-blob-b {
+        animation: nl-drift-b 28s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .nl-blob-a,
+        .nl-blob-b {
+          animation: none;
+        }
+      }
+      .nl-reveal {
+        opacity: 0;
+        transform: translate3d(0, 1.25rem, 0);
+        transition:
+          opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .nl-reveal.nl-inview {
+        opacity: 1;
+        transform: none;
+      }
+
+      .nl-reveal .nl-reveal-line {
+        transform: scaleX(0);
+        transform-origin: 50% 50%;
+        opacity: 0;
+        transition:
+          transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.5s ease;
+      }
+      .nl-reveal.nl-inview .nl-reveal-line {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+
+      .nl-reveal-stagger > .nl-reveal-item {
+        opacity: 0;
+        transform: translate3d(0, 1.25rem, 0);
+        transition:
+          opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item {
+        opacity: 1;
+        transform: none;
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item:nth-child(1) {
+        transition-delay: 0ms;
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item:nth-child(2) {
+        transition-delay: 0.08s;
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item:nth-child(3) {
+        transition-delay: 0.16s;
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item:nth-child(4) {
+        transition-delay: 0.24s;
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item:nth-child(5) {
+        transition-delay: 0.32s;
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item:nth-child(6) {
+        transition-delay: 0.4s;
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item:nth-child(7) {
+        transition-delay: 0.48s;
+      }
+      .nl-reveal-stagger.nl-inview > .nl-reveal-item:nth-child(8) {
+        transition-delay: 0.56s;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .nl-reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .nl-reveal .nl-reveal-line {
+          transform: scaleX(1);
+          opacity: 1;
+          transition: none;
+        }
+        .nl-reveal-stagger > .nl-reveal-item {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
+      .nl-hero-bento {
+        box-shadow:
+          0 20px 50px -18px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+    </style>
     <script>
       tailwind.config = {
         theme: {
@@ -46,153 +162,370 @@
             fontFamily: {
               serif: ['Playfair Display', 'Georgia', 'serif'],
               sans: ['Inter', 'system-ui', 'sans-serif'],
-              brand: ['Montserrat', 'system-ui', 'sans-serif'],
+              brand: ['Inter', 'system-ui', 'sans-serif'],
             },
           },
         },
       };
     </script>
   </head>
-  <body class="min-h-screen font-sans antialiased text-white bg-gradient-to-b from-[#0a1628] via-[#0f4a6b] to-[#2ec8e8]">
+  <body class="relative min-h-screen overflow-x-hidden font-sans antialiased text-white bg-[#0a1628]">
+    <!-- Brand gradient + subtle texture -->
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      <div
+        class="absolute inset-0 bg-[linear-gradient(to_bottom,_#0a1628_0%,_#0b2038_22%,_#0f4a6b_48%,_#127090_66%,_#1c9cb8_82%,_#26b6d6_94%,_#29bddf_100%)]"
+      ></div>
+      <div
+        class="nl-blob-a absolute -left-[20%] top-[8%] h-[min(65vw,480px)] w-[min(65vw,480px)] rounded-full bg-[#2ec8e8]/18 blur-[100px]"
+      ></div>
+      <div
+        class="nl-blob-b absolute -right-[18%] bottom-[5%] h-[min(60vw,420px)] w-[min(60vw,420px)] rounded-full bg-[#0f4a6b]/45 blur-[95px]"
+      ></div>
+      <div
+        class="absolute inset-0 opacity-[0.22] mix-blend-overlay"
+        style="
+          background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.05%22/%3E%3C/svg%3E');
+        "
+      ></div>
+      <div
+        class="absolute inset-0 opacity-[0.05]"
+        style="
+          background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+          background-size: 28px 28px;
+        "
+      ></div>
+    </div>
 
     <!-- Nav (sticky) -->
-    <header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a1628]/85 backdrop-blur-md shadow-sm">
-      <nav class="mx-auto flex w-full max-w-[1800px] items-center justify-between gap-2 px-4 py-4 sm:gap-4 sm:px-6 sm:py-5 md:px-10 lg:px-14 xl:px-20">
-        <a href="/" class="flex min-w-0 items-center gap-2 sm:gap-3 hover:opacity-90 transition-opacity">
-          <div class="flex h-16 w-16 shrink-0 items-center justify-center p-2 sm:h-20 sm:w-20 sm:p-3">
+    <header class="sticky top-0 z-50 px-3 pt-2.5 sm:px-4 sm:pt-3 md:px-6 lg:px-8">
+      <nav
+        class="mx-auto flex w-full max-w-[min(100%,1200px)] items-center justify-between gap-2 rounded-2xl border border-white/10 bg-[#0a1628]/75 px-3 py-2.5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:gap-3 sm:px-5 sm:py-3 md:px-6"
+      >
+        <a href="/" class="flex min-w-0 items-center gap-2 sm:gap-3 transition-opacity hover:opacity-90">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center p-1 sm:h-12 sm:w-12 md:h-14 md:w-14 md:p-1.5">
             <img src="/brand-logo.png?v=13" alt="NewsLight" fetchpriority="high" decoding="async" class="max-h-full max-w-full object-contain rounded-none" />
           </div>
-          <span class="font-brand truncate text-lg tracking-tight sm:text-xl md:text-2xl"><span class="font-bold">News</span><span class="font-light">Light</span></span>
+          <span class="font-brand truncate text-base tracking-tight sm:text-lg md:text-xl lg:text-2xl"
+            ><span class="font-bold">News</span><span class="font-light">Light</span></span
+          >
         </a>
-        <div class="flex shrink-0 flex-wrap items-center justify-end gap-x-3 gap-y-1 sm:gap-x-5 md:gap-x-6">
-          <a href="#top" class="text-sm font-medium text-white/75 hover:text-white transition-colors">About</a>
-          <a href="#download" class="text-sm font-medium text-white/75 hover:text-white transition-colors">Download</a>
-          <a href="#contact" class="text-sm font-medium text-white/75 hover:text-white transition-colors">Contact</a>
+        <div class="flex shrink-0 flex-wrap items-center justify-end gap-0.5 sm:gap-1">
+          <a
+            href="#top"
+            class="rounded-full px-2.5 py-1.5 text-xs font-medium text-white/75 transition-colors hover:bg-white/10 hover:text-white sm:px-3 sm:py-2 sm:text-sm md:px-4"
+            >Home</a
+          >
+          <a
+            href="#features"
+            class="rounded-full px-2.5 py-1.5 text-xs font-medium text-white/75 transition-colors hover:bg-white/10 hover:text-white sm:px-3 sm:py-2 sm:text-sm md:px-4"
+            >Features</a
+          >
+          <a
+            href="#download"
+            class="rounded-full px-2.5 py-1.5 text-xs font-medium text-white/75 transition-colors hover:bg-white/10 hover:text-white sm:px-3 sm:py-2 sm:text-sm md:px-4"
+            >Download</a
+          >
+          <a
+            href="#contact"
+            class="rounded-full px-2.5 py-1.5 text-xs font-medium text-white/75 transition-colors hover:bg-white/10 hover:text-white sm:px-3 sm:py-2 sm:text-sm md:px-4"
+            >Contact</a
+          >
         </div>
       </nav>
     </header>
 
-    <!-- Hero -->
-    <section id="top" class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 pt-12 md:pt-20 pb-28 text-center scroll-mt-28">
-      <h1 class="font-serif text-5xl md:text-7xl font-900 leading-tight tracking-tight mb-6">
-        Your Community,<br />Brought to Light
-      </h1>
-      <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-        Authentic local news. Everything happening in your neighborhood, in one seamless feed.
-      </p>
+    <!-- Hero: same horizontal frame as nav tile (header gutters + 1200px + nav inner padding) -->
+    <section
+      id="top"
+      class="flex min-h-[calc(100dvh-5.5rem)] flex-col scroll-mt-24 px-3 sm:min-h-[calc(100dvh-6rem)] sm:scroll-mt-28 sm:px-4 md:min-h-[calc(100dvh-6.25rem)] md:px-6 lg:px-8"
+    >
+      <div
+        class="relative mx-auto flex w-full max-w-[min(100%,1200px)] flex-1 flex-col px-3 pb-16 pt-12 sm:px-5 sm:pb-20 sm:pt-14 md:px-6 md:pb-24 md:pt-16 lg:pb-28 lg:pt-20"
+      >
+        <div
+          class="pointer-events-none absolute -right-8 top-4 h-56 w-56 rounded-full bg-[#2ec8e8]/8 blur-[88px] sm:-right-4 sm:h-64 sm:w-64 md:top-8 lg:right-0 lg:top-10 lg:h-72 lg:w-72"
+          aria-hidden="true"
+        ></div>
+
+        <div class="relative grid gap-10 sm:gap-12 lg:grid-cols-12 lg:items-start lg:gap-x-8 lg:gap-y-0 xl:gap-x-12 2xl:gap-x-14">
+        <!-- Copy + CTAs -->
+        <div class="min-w-0 text-center lg:col-span-7 lg:pt-1 lg:text-left">
+          <div class="mb-6 flex flex-wrap items-center justify-center gap-2 sm:mb-8 lg:justify-start">
+            <span
+              class="nl-hero-bento inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/90 backdrop-blur-md sm:gap-2.5 sm:px-3.5 sm:text-[11px] sm:tracking-[0.16em]"
+            >
+              <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2ec8e8] opacity-40 motion-reduce:animate-none"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-[#5ecfff] shadow-[0_0_6px_rgba(94,207,255,0.45)] sm:h-2.5 sm:w-2.5"></span>
+              </span>
+              Live on App Store
+            </span>
+            <span
+              class="nl-hero-bento hidden rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[10px] font-medium text-white/65 backdrop-blur-md sm:inline sm:px-3.5 sm:text-[11px]"
+              >Neighborhood news</span
+            >
+          </div>
+
+          <h1
+            class="font-serif font-black tracking-[-0.02em] text-white [font-size:clamp(1.75rem,4.2vw+0.6rem,3.35rem)] [line-height:1.08] sm:[line-height:1.06] md:[font-size:clamp(2.25rem,3.5vw+1rem,3.5rem)] lg:[font-size:clamp(2.5rem,2.8vw+1.35rem,3.75rem)]"
+          >
+            <span class="text-white">Your Community,</span><br />
+            <span class="mt-1 inline-block text-[#b8e8f6] sm:mt-2">Brought to Light</span>
+          </h1>
+
+          <p
+            class="mx-auto mt-6 max-w-[36rem] text-sm leading-relaxed text-white/75 sm:mt-8 sm:text-base sm:leading-relaxed md:text-lg lg:mx-0 lg:max-w-[34rem] lg:text-lg xl:max-w-xl xl:text-xl xl:leading-relaxed"
+          >
+            Authentic local news for where you live — clear, calm, and close to home. One feed that actually fits your block, not the whole internet.
+          </p>
+
+          <div
+            class="mx-auto mt-8 flex w-full max-w-md flex-col gap-3 sm:mt-10 sm:max-w-lg sm:flex-row sm:flex-wrap sm:justify-center lg:mx-0 lg:max-w-none lg:justify-start"
+          >
+            <a
+              href="https://apps.apple.com/ca/app/newslight/id6758728521"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="nl-hero-bento inline-flex min-h-[2.75rem] w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white px-6 py-3 text-sm font-semibold text-[#0a1628] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-white/95 sm:w-auto sm:min-h-[2.875rem] sm:px-7 sm:text-[0.9375rem] md:px-8"
+            >
+              <svg class="h-4 w-4 shrink-0 sm:h-5 sm:w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                />
+              </svg>
+              Get the app
+            </a>
+            <a
+              href="#features"
+              class="nl-hero-bento inline-flex min-h-[2.75rem] w-full items-center justify-center rounded-full border border-white/20 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/95 backdrop-blur-md transition hover:border-[#2ec8e8]/40 hover:bg-white/[0.08] sm:w-auto sm:min-h-[2.875rem] sm:px-7 sm:text-[0.9375rem] md:px-8"
+            >
+              Explore features
+            </a>
+          </div>
+
+          <p class="mt-5 text-center text-xs text-white/40 sm:mt-6 sm:text-sm lg:text-left">Free on iPhone · Opens the Canadian App Store</p>
+        </div>
+
+        <!-- Bento rail -->
+        <div class="mx-auto w-full max-w-[min(100%,22rem)] sm:max-w-md lg:col-span-5 lg:mx-0 lg:max-w-none lg:pt-2">
+          <div class="grid gap-3.5 sm:gap-4 md:gap-5">
+            <div class="nl-hero-bento rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-md sm:rounded-3xl sm:p-6 md:p-7">
+              <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-[11px] sm:tracking-[0.2em]">Product</p>
+              <p class="mt-2 font-sans text-lg font-semibold tracking-tight text-white sm:mt-3 sm:text-xl md:text-2xl">NewsLight for iOS</p>
+              <p class="mt-2 text-sm leading-relaxed text-white/60 sm:mt-3 sm:text-base sm:leading-relaxed">
+                Local headlines, summaries, and context — tuned for your community.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 gap-3.5 sm:gap-4 md:gap-5">
+              <div class="nl-hero-bento rounded-2xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-md transition hover:border-white/15 sm:rounded-3xl sm:p-5 md:p-6">
+                <p class="text-2xl font-bold tabular-nums tracking-tight text-white sm:text-3xl md:text-3xl">iOS</p>
+                <p class="mt-1 text-[10px] font-medium uppercase tracking-wider text-white/45 sm:text-xs">Native app</p>
+              </div>
+              <div class="nl-hero-bento rounded-2xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-md transition hover:border-white/15 sm:rounded-3xl sm:p-5 md:p-6">
+                <p class="text-2xl font-bold tabular-nums tracking-tight text-white sm:text-3xl md:text-3xl">Free</p>
+                <p class="mt-1 text-[10px] font-medium uppercase tracking-wider text-white/45 sm:text-xs">Download</p>
+              </div>
+            </div>
+            <div
+              class="nl-hero-bento flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:rounded-3xl sm:px-5 sm:py-5 md:px-6"
+            >
+              <p class="text-sm font-medium leading-snug text-white/80 sm:text-base">Questions or partnerships?</p>
+              <a href="#contact" class="mt-3 inline-block text-sm font-semibold text-amber-300 underline-offset-4 transition hover:text-amber-100 sm:mt-0 sm:text-base">Contact →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="mt-auto flex justify-center pt-8 sm:pt-10">
+          <a
+            href="#features"
+            class="nl-hero-bento flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/70 backdrop-blur-md transition hover:border-[#2ec8e8]/40 hover:bg-white/[0.1] hover:text-white motion-reduce:transition-none sm:h-12 sm:w-12"
+            aria-label="Scroll to features"
+          >
+            <svg class="h-5 w-5 animate-bounce motion-reduce:animate-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Divider -->
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20">
-      <hr class="border-white/15" />
+    <div class="nl-reveal px-3 sm:px-4 md:px-6 lg:px-8">
+      <div class="mx-auto w-full max-w-[min(100%,1200px)] px-3 sm:px-5 md:px-6">
+        <div class="h-px w-full overflow-hidden bg-transparent">
+          <div class="nl-reveal-line h-full w-full bg-white/[0.08]"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Features -->
-    <section class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 py-24">
-      <div class="grid md:grid-cols-3 gap-12 md:gap-8">
-
-        <div>
-          <h3 class="font-serif text-2xl font-bold mb-3">Hyper-Local Coverage</h3>
-          <p class="text-white/80 leading-relaxed">
-            News from your exact neighborhood — not a city over. We surface what matters most within blocks of where you live.
+    <section id="features" class="scroll-mt-28 px-3 py-14 sm:px-4 sm:py-16 md:px-6 md:py-20 lg:px-8" aria-labelledby="features-heading">
+      <div class="mx-auto w-full max-w-[min(100%,1200px)] px-3 sm:px-5 md:px-6">
+        <div class="nl-reveal-stagger grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+          <div class="nl-reveal-item col-span-full mb-8 text-center sm:mb-10">
+            <p class="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300 sm:mb-3 sm:text-[11px] sm:tracking-[0.2em]">Why NewsLight</p>
+            <h2 id="features-heading" class="font-serif text-2xl font-bold sm:text-3xl md:text-4xl">Built for where you live</h2>
+            <p class="mx-auto mt-2 max-w-xl text-sm text-white/65 sm:mt-3 md:text-base">Clean layout, clear type, and room to breathe.</p>
+          </div>
+        <article
+          class="nl-reveal-item nl-hero-bento group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition duration-300 hover:border-white/15 hover:bg-white/[0.08] sm:min-h-[240px] sm:rounded-3xl sm:p-7 md:min-h-[260px]"
+        >
+          <div>
+            <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-[11px] sm:tracking-[0.2em]">Coverage</p>
+            <h3 class="font-sans text-xl font-bold leading-snug tracking-tight text-white sm:text-2xl">Hyper-local</h3>
+          </div>
+          <p class="text-sm leading-relaxed text-white/80">
+            News from your exact neighborhood — not a city over. What matters most, within blocks of where you live.
           </p>
-        </div>
+        </article>
 
-        <div>
-          <h3 class="font-serif text-2xl font-bold mb-3">Clear Summaries</h3>
-          <p class="text-white/80 leading-relaxed">
-            Get the full picture in seconds. Local stories distilled into clear, concise summaries so you stay informed without the noise.
+        <article
+          class="nl-reveal-item nl-hero-bento group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition duration-300 hover:border-white/15 hover:bg-white/[0.08] sm:min-h-[240px] sm:rounded-3xl sm:p-7 md:min-h-[260px]"
+        >
+          <div>
+            <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-[11px] sm:tracking-[0.2em]">Clarity</p>
+            <h3 class="font-sans text-xl font-bold leading-snug tracking-tight text-white sm:text-2xl">Quick summaries</h3>
+          </div>
+          <p class="text-sm leading-relaxed text-white/80">
+            Get the full picture in seconds. Stories distilled so you stay informed without the noise.
           </p>
-        </div>
+        </article>
 
-        <div>
-          <h3 class="font-serif text-2xl font-bold mb-3">Share What Matters</h3>
-          <p class="text-white/80 leading-relaxed">
-            Found something your neighbors should know? Share stories instantly with your community through any platform.
+        <article
+          class="nl-reveal-item nl-hero-bento group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] p-6 backdrop-blur-md transition duration-300 hover:border-white/15 hover:bg-white/[0.08] sm:col-span-2 sm:min-h-[240px] sm:rounded-3xl sm:p-7 md:min-h-[260px] lg:col-span-1"
+        >
+          <div>
+            <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-[11px] sm:tracking-[0.2em]">Community</p>
+            <h3 class="font-sans text-xl font-bold leading-snug tracking-tight text-white sm:text-2xl">Share what matters</h3>
+          </div>
+          <p class="text-sm leading-relaxed text-white/80">
+            Found something neighbors should know? Pass it along in a tap — the way local news is supposed to travel.
           </p>
+        </article>
         </div>
-
       </div>
     </section>
 
     <!-- Divider -->
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20">
-      <hr class="border-white/15" />
+    <div class="nl-reveal px-3 sm:px-4 md:px-6 lg:px-8">
+      <div class="mx-auto w-full max-w-[min(100%,1200px)] px-3 sm:px-5 md:px-6">
+        <div class="h-px w-full overflow-hidden bg-transparent">
+          <div class="nl-reveal-line h-full w-full bg-white/[0.08]"></div>
+        </div>
+      </div>
     </div>
 
-    <!-- Download (Coming Soon) -->
-    <section id="download" class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 py-24 text-center scroll-mt-28">
-      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Coming Soon</h2>
-      <p class="text-white/80 mb-10 text-lg">NewsLight is launching soon on iOS. Your neighborhood is waiting.</p>
-      <div class="inline-flex items-center gap-2 bg-black/20 backdrop-blur-sm border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full shadow-lg shadow-black/10">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Coming to the App Store
+    <!-- Download -->
+    <section id="download" class="scroll-mt-28 px-3 py-20 sm:px-4 md:px-6 md:py-24 lg:px-8">
+      <div class="mx-auto w-full max-w-[min(100%,1200px)] px-3 sm:px-5 md:px-6">
+        <div class="nl-reveal-stagger mx-auto flex max-w-xl flex-col items-center text-center">
+          <div class="nl-reveal-item w-full">
+            <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-[11px] sm:tracking-[0.2em]">iPhone</p>
+            <h2 class="mb-4 font-serif text-3xl font-bold md:text-4xl">Download NewsLight</h2>
+          </div>
+          <div class="nl-reveal-item w-full">
+            <p class="mb-8 text-lg text-white/80">
+              Available now on the App Store. Your neighborhood, in your pocket.
+            </p>
+          </div>
+          <div class="nl-reveal-item flex w-full justify-center">
+            <a
+              href="https://apps.apple.com/ca/app/newslight/id6758728521"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="nl-hero-bento inline-flex min-h-[2.875rem] items-center justify-center gap-2 rounded-full border border-white/10 bg-white px-8 py-3.5 text-sm font-semibold text-[#0a1628] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-white/95"
+            >
+              <svg class="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <span>Download on the App Store</span>
+            </a>
+          </div>
+          <div class="nl-reveal-item w-full">
+            <p class="mt-6 text-xs text-white/45">Opens the Canadian App Store listing in a new tab.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Divider -->
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20">
-      <hr class="border-white/15" />
+    <div class="nl-reveal px-3 sm:px-4 md:px-6 lg:px-8">
+      <div class="mx-auto w-full max-w-[min(100%,1200px)] px-3 sm:px-5 md:px-6">
+        <div class="h-px w-full overflow-hidden bg-transparent">
+          <div class="nl-reveal-line h-full w-full bg-white/[0.08]"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Contact -->
-    <section id="contact" class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 py-24 scroll-mt-28">
-      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Contact</h2>
-      <p class="text-white/80 leading-relaxed mb-8">
-        Questions, feedback, or support? Send us a message below. Submissions are delivered to <a href="mailto:contact@newslight.com" class="text-white underline hover:text-white/90">contact@newslight.com</a>.
-      </p>
+    <section id="contact" class="scroll-mt-28 px-3 py-20 sm:px-4 md:px-6 md:py-24 lg:px-8">
+      <div class="mx-auto w-full max-w-[min(100%,1200px)] px-3 sm:px-5 md:px-6">
+        <div class="nl-reveal-stagger mx-auto flex max-w-2xl flex-col">
+          <div class="nl-reveal-item">
+            <h2 class="mb-4 font-serif text-3xl font-bold md:text-4xl">Contact</h2>
+          </div>
+          <div class="nl-reveal-item">
+            <p class="mb-8 leading-relaxed text-white/80">
+              Questions, feedback, or support? Send us a message below. Submissions are delivered to
+              <a href="mailto:contact@newslight.com" class="font-semibold text-amber-300 underline underline-offset-4 transition hover:text-amber-100">contact@newslight.com</a>.
+            </p>
+          </div>
+          <div class="nl-reveal-item">
+            <div
+              id="contact-sent"
+              class="nl-hero-bento mb-8 hidden rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm text-white/95 backdrop-blur-md"
+              role="status"
+            >
+              Thanks — your message was sent. We’ll get back to you if a reply is needed.
+            </div>
 
-      <div id="contact-sent" class="hidden mb-8 rounded-xl bg-white/15 border border-white/30 px-4 py-3 text-white text-sm" role="status">
-        Thanks — your message was sent. We’ll get back to you if a reply is needed.
+            <form action="https://formsubmit.co/contact@newslight.com" method="POST" class="space-y-6">
+            <input type="hidden" name="_subject" value="NewsLight website contact" />
+            <input type="hidden" name="_next" value="https://www.newslight.com/?contact=sent#contact" />
+            <input type="hidden" name="_captcha" value="false" />
+
+            <div>
+              <label for="contact-email" class="mb-2 block text-sm font-medium text-white/90"
+                >Your email <span class="font-normal text-white/55">(optional, for replies)</span></label
+              >
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                autocomplete="email"
+                class="w-full rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-white placeholder:text-white/40 backdrop-blur-md transition focus:border-[#2ec8e8]/50 focus:outline-none focus:ring-2 focus:ring-[#2ec8e8]/30"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label for="contact-message" class="mb-2 block text-sm font-medium text-white/90">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                rows="8"
+                class="min-h-[200px] w-full resize-y rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-white placeholder:text-white/40 backdrop-blur-md transition focus:border-[#2ec8e8]/50 focus:outline-none focus:ring-2 focus:ring-[#2ec8e8]/30"
+                placeholder="Type your message here…"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="nl-hero-bento inline-flex items-center justify-center rounded-full border border-white/10 bg-white px-8 py-3 text-sm font-semibold text-[#0a1628] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-white/95"
+            >
+              Submit
+            </button>
+            </form>
+          </div>
+        </div>
       </div>
-
-      <form
-        action="https://formsubmit.co/contact@newslight.com"
-        method="POST"
-        class="space-y-6"
-      >
-        <input type="hidden" name="_subject" value="NewsLight website contact" />
-        <input type="hidden" name="_next" value="https://www.newslight.com/?contact=sent#contact" />
-        <input type="hidden" name="_captcha" value="false" />
-
-        <div>
-          <label for="contact-email" class="block text-sm font-medium text-white/90 mb-2">Your email <span class="text-white/55 font-normal">(optional, for replies)</span></label>
-          <input
-            type="email"
-            id="contact-email"
-            name="email"
-            autocomplete="email"
-            class="w-full rounded-lg bg-black/25 border border-white/30 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
-            placeholder="you@example.com"
-          />
-        </div>
-
-        <div>
-          <label for="contact-message" class="block text-sm font-medium text-white/90 mb-2">Message</label>
-          <textarea
-            id="contact-message"
-            name="message"
-            required
-            rows="8"
-            class="w-full rounded-lg bg-black/25 border border-white/30 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 resize-y min-h-[200px]"
-            placeholder="Type your message here…"
-          ></textarea>
-        </div>
-
-        <button
-          type="submit"
-          class="inline-flex items-center justify-center rounded-full bg-white text-neutral-950 font-semibold text-sm px-8 py-3 hover:bg-neutral-200 transition-colors"
-        >
-          Submit
-        </button>
-      </form>
     </section>
 
     <!-- Footer -->
-    <footer class="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20 py-12 border-t border-white/15">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-white/55 text-sm">&copy; 2026 NewsLight. All rights reserved.</p>
-        <div class="flex gap-6">
+    <footer class="border-t border-white/10 px-3 py-12 sm:px-4 md:px-6 lg:px-8">
+      <div class="nl-reveal-stagger mx-auto flex w-full max-w-[min(100%,1200px)] flex-col items-center justify-between gap-4 px-3 sm:flex-row sm:px-5 md:px-6">
+        <p class="nl-reveal-item text-center text-sm text-white/55 sm:text-left">&copy; 2026 NewsLight. All rights reserved.</p>
+        <div class="nl-reveal-item flex gap-6">
           <a href="/terms" class="text-white/55 text-sm hover:text-white transition-colors">Terms</a>
           <a href="/privacy" class="text-white/55 text-sm hover:text-white transition-colors">Privacy</a>
           <a href="#contact" class="text-white/55 text-sm hover:text-white transition-colors">Contact</a>
@@ -215,6 +548,31 @@
         if (window.history && window.history.replaceState) {
           window.history.replaceState(null, '', '/#contact');
         }
+      })();
+    </script>
+    <script>
+      (function () {
+        var targets = document.querySelectorAll('.nl-reveal, .nl-reveal-stagger');
+        if (!('IntersectionObserver' in window)) {
+          targets.forEach(function (el) {
+            el.classList.add('nl-inview');
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add('nl-inview');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -5% 0px', threshold: 0.06 }
+        );
+        targets.forEach(function (el) {
+          io.observe(el);
+        });
       })();
     </script>
   </body>
