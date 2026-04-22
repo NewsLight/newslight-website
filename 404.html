@@ -139,7 +139,7 @@
       </div>
     </footer>
 
-    <!-- Shared article links: /article/{uuid} → web preview (404.html on static hosts). Two CTAs: View in App (HTTPS Universal Link, /.well-known/apple-app-site-association) and Download App (App Store). -->
+    <!-- Shared article links: /article/{uuid} → web preview + "Open in NewsLight" (newslight://) + App Store (404.html on static hosts). Do not remove this script. -->
     <script>
       (function () {
         var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -163,12 +163,10 @@
         }
 
         function showArticlePage(uuid) {
+          var deepLink = 'newslight://app/news/' + uuid;
           var appStoreUrl = 'https://apps.apple.com/ca/app/newslight/id6758728521';
           var apiUrl = 'https://skykbtnscepbkerzcqlq.supabase.co/functions/v1/news/articles/' + uuid + '/preview';
           var apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNreWtidG5zY2VwYmtlcnpjcWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3OTE3ODYsImV4cCI6MjA4MjM2Nzc4Nn0.I9Uk1M_Hc3V5LPsbYmZMqDjkl1qfDvR7pqXcMtZqmpo';
-          // Same URL the app claims for Universal Links (see /.well-known/apple-app-site-association → /article/*)
-          var viewInAppUrl =
-            window.location.protocol + '//' + window.location.host + '/article/' + uuid;
 
           // Show loading state
           document.getElementById('content').innerHTML =
@@ -176,6 +174,8 @@
               '<div class="inline-block w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>' +
               '<p class="text-white/80 mt-4">Loading article…</p>' +
             '</div>';
+
+          // Deep link is triggered by the "Open in NewsLight" button, not auto-redirect
 
           // Fetch article preview
           fetch(apiUrl, {
@@ -202,16 +202,15 @@
               document.getElementById('content').innerHTML =
                 '<article class="py-8">' +
                   (city ? '<p class="text-sm font-medium text-white/55 uppercase tracking-wider mb-4">' + escapeHtml(city) + '</p>' : '') +
-                  '<h1 class="font-serif text-2xl md:text-4xl font-bold leading-tight mb-6">' + escapeHtml(headline) + '</h1>' +
-                  (summary
-                    ? '<p class="text-lg text-white/75 leading-relaxed mb-10">' + escapeHtml(summary) + '</p>'
-                    : '') +
-                  '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-center">' +
-                    '<p class="text-white/80 mb-2 text-sm leading-relaxed">Already use NewsLight? Open this story in the app. New here? Install from the App Store.</p>' +
-                    '<div class="mt-6 flex flex-col items-stretch justify-center gap-3 sm:mt-5 sm:flex-row sm:items-center sm:justify-center">' +
-                      '<a href="' + viewInAppUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[2.75rem] items-center justify-center rounded-full bg-white px-6 py-3 text-center text-sm font-semibold text-neutral-950 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-neutral-200 sm:min-h-0 sm:px-8 sm:py-4 sm:text-base">View in App</a>' +
-                      '<a href="' + appStoreUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[2.75rem] items-center justify-center rounded-full border border-white/25 bg-black/25 px-6 py-3 text-center text-sm font-semibold text-white backdrop-blur-md transition hover:border-white/40 hover:bg-black/35 sm:min-h-0 sm:px-8 sm:py-4 sm:text-base">Download App</a>' +
-                    '</div>' +
+                  '<h1 class="font-serif text-2xl md:text-3xl font-bold leading-tight mb-10 line-clamp-2">' + escapeHtml(headline.length > 60 ? headline.substring(0, 60) + '…' : headline) + '</h1>' +
+                  '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-center mb-12">' +
+                    '<p class="text-white/80 mb-6">This article is available exclusively in the NewsLight app</p>' +
+                    '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in NewsLight</a>' +
+                  '</div>' +
+                  '<div class="text-center">' +
+                    '<h2 class="font-serif text-2xl font-bold mb-3">Get NewsLight</h2>' +
+                    '<p class="text-white/80 mb-6">Available on the App Store for iPhone.</p>' +
+                    '<a href="' + appStoreUrl + '" target="_blank" rel="noopener noreferrer" class="inline-block bg-black/25 border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full hover:border-white/40 hover:bg-black/35 transition-colors">Download on the App Store</a>' +
                   '</div>' +
                 '</article>';
             })
@@ -221,12 +220,13 @@
                 '<div class="py-8 text-center">' +
                   '<h1 class="font-serif text-3xl md:text-4xl font-bold mb-4">Read This Article in NewsLight</h1>' +
                   '<p class="text-white/80 text-lg mb-8">This article is available exclusively in the NewsLight app.</p>' +
-                  '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8">' +
-                    '<p class="text-white/80 mb-2 text-sm leading-relaxed">Already use NewsLight? Open this story in the app. New here? Install from the App Store.</p>' +
-                    '<div class="mt-6 flex flex-col items-stretch justify-center gap-3 sm:mt-5 sm:flex-row sm:items-center sm:justify-center">' +
-                      '<a href="' + viewInAppUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[2.75rem] items-center justify-center rounded-full bg-white px-6 py-3 text-center text-sm font-semibold text-neutral-950 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-neutral-200 sm:min-h-0 sm:px-8 sm:py-4 sm:text-base">View in App</a>' +
-                      '<a href="' + appStoreUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[2.75rem] items-center justify-center rounded-full border border-white/25 bg-black/25 px-6 py-3 text-center text-sm font-semibold text-white backdrop-blur-md transition hover:border-white/40 hover:bg-black/35 sm:min-h-0 sm:px-8 sm:py-4 sm:text-base">Download App</a>' +
-                    '</div>' +
+                  '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 mb-12">' +
+                    '<a href="' + deepLink + '" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors mb-3">Open in NewsLight</a>' +
+                  '</div>' +
+                  '<div>' +
+                    '<h2 class="font-serif text-2xl font-bold mb-3">Get NewsLight</h2>' +
+                    '<p class="text-white/80 mb-6">Available on the App Store for iPhone.</p>' +
+                    '<a href="' + appStoreUrl + '" target="_blank" rel="noopener noreferrer" class="inline-block bg-black/25 border border-white/25 text-white font-semibold text-sm px-8 py-4 rounded-full hover:border-white/40 hover:bg-black/35 transition-colors">Download on the App Store</a>' +
                   '</div>' +
                 '</div>';
             });
