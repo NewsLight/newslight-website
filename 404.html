@@ -139,7 +139,7 @@
       </div>
     </footer>
 
-    <!-- Shared article links: /article/{uuid} → web preview (404.html on static hosts). "Open in NewsLight" tries the Universal Link in a hidden iframe (avoids same-tab reload that cancels the App Store fallback), then same-tab App Store if the app does not take focus. -->
+    <!-- Shared article links: /article/{uuid} → web preview (404.html on static hosts). Two CTAs: View in App (HTTPS Universal Link, /.well-known/apple-app-site-association) and Download App (App Store). -->
     <script>
       (function () {
         var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -166,13 +166,9 @@
           var appStoreUrl = 'https://apps.apple.com/ca/app/newslight/id6758728521';
           var apiUrl = 'https://skykbtnscepbkerzcqlq.supabase.co/functions/v1/news/articles/' + uuid + '/preview';
           var apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNreWtidG5zY2VwYmtlcnpjcWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3OTE3ODYsImV4cCI6MjA4MjM2Nzc4Nn0.I9Uk1M_Hc3V5LPsbYmZMqDjkl1qfDvR7pqXcMtZqmpo';
-          // Universal Link (must match Associated Domains / apple-app-site-association path /article/*)
-          var universalBase =
+          // Same URL the app claims for Universal Links (see /.well-known/apple-app-site-association → /article/*)
+          var viewInAppUrl =
             window.location.protocol + '//' + window.location.host + '/article/' + uuid;
-          var pathNorm = window.location.pathname.replace(/\/+$/, '').toLowerCase();
-          var articlePathNorm = ('/article/' + uuid).toLowerCase();
-          var universalOpenLink =
-            pathNorm === articlePathNorm ? universalBase + '?nl=1' : universalBase;
 
           // Show loading state
           document.getElementById('content').innerHTML =
@@ -180,8 +176,6 @@
               '<div class="inline-block w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>' +
               '<p class="text-white/80 mt-4">Loading article…</p>' +
             '</div>';
-
-          // "Open in NewsLight": try Universal Link in a hidden iframe (main window must NOT assign same-origin URL or the page reloads and the App Store timer never runs).
 
           // Fetch article preview
           fetch(apiUrl, {
@@ -213,11 +207,13 @@
                     ? '<p class="text-lg text-white/75 leading-relaxed mb-10">' + escapeHtml(summary) + '</p>'
                     : '') +
                   '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-center">' +
-                    '<p class="text-white/80 mb-6">Read the full story in the NewsLight app.</p>' +
-                    '<a href="' + appStoreUrl + '" id="nl-article-open-btn" data-app-link="' + universalOpenLink + '" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Open in NewsLight</a>' +
+                    '<p class="text-white/80 mb-2 text-sm leading-relaxed">Already use NewsLight? Open this story in the app. New here? Install from the App Store.</p>' +
+                    '<div class="mt-6 flex flex-col items-stretch justify-center gap-3 sm:mt-5 sm:flex-row sm:items-center sm:justify-center">' +
+                      '<a href="' + viewInAppUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[2.75rem] items-center justify-center rounded-full bg-white px-6 py-3 text-center text-sm font-semibold text-neutral-950 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-neutral-200 sm:min-h-0 sm:px-8 sm:py-4 sm:text-base">View in App</a>' +
+                      '<a href="' + appStoreUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[2.75rem] items-center justify-center rounded-full border border-white/25 bg-black/25 px-6 py-3 text-center text-sm font-semibold text-white backdrop-blur-md transition hover:border-white/40 hover:bg-black/35 sm:min-h-0 sm:px-8 sm:py-4 sm:text-base">Download App</a>' +
+                    '</div>' +
                   '</div>' +
                 '</article>';
-              wireArticleOpenButton();
             })
             .catch(function () {
               document.title = 'Article — NewsLight';
@@ -226,43 +222,14 @@
                   '<h1 class="font-serif text-3xl md:text-4xl font-bold mb-4">Read This Article in NewsLight</h1>' +
                   '<p class="text-white/80 text-lg mb-8">This article is available exclusively in the NewsLight app.</p>' +
                   '<div class="bg-black/20 backdrop-blur-sm border border-white/20 rounded-2xl p-8">' +
-                    '<a href="' + appStoreUrl + '" id="nl-article-open-btn" data-app-link="' + universalOpenLink + '" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-neutral-950 font-semibold px-8 py-4 rounded-full hover:bg-neutral-200 transition-colors">Open in NewsLight</a>' +
+                    '<p class="text-white/80 mb-2 text-sm leading-relaxed">Already use NewsLight? Open this story in the app. New here? Install from the App Store.</p>' +
+                    '<div class="mt-6 flex flex-col items-stretch justify-center gap-3 sm:mt-5 sm:flex-row sm:items-center sm:justify-center">' +
+                      '<a href="' + viewInAppUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[2.75rem] items-center justify-center rounded-full bg-white px-6 py-3 text-center text-sm font-semibold text-neutral-950 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-neutral-200 sm:min-h-0 sm:px-8 sm:py-4 sm:text-base">View in App</a>' +
+                      '<a href="' + appStoreUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[2.75rem] items-center justify-center rounded-full border border-white/25 bg-black/25 px-6 py-3 text-center text-sm font-semibold text-white backdrop-blur-md transition hover:border-white/40 hover:bg-black/35 sm:min-h-0 sm:px-8 sm:py-4 sm:text-base">Download App</a>' +
+                    '</div>' +
                   '</div>' +
                 '</div>';
-              wireArticleOpenButton();
             });
-        }
-
-        function wireArticleOpenButton() {
-          var btn = document.getElementById('nl-article-open-btn');
-          if (!btn) return;
-          var store = btn.getAttribute('href');
-          var appLink = btn.getAttribute('data-app-link');
-          if (!store || !appLink) return;
-          btn.addEventListener('click', function (e) {
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-            e.preventDefault();
-            var appOpened = false;
-            function onVisibility() {
-              if (document.visibilityState === 'hidden') appOpened = true;
-            }
-            document.addEventListener('visibilitychange', onVisibility);
-            // Same-tab assign() to the article URL reloads this page and kills this script — use a
-            // hidden iframe so the App Store fallback timer still runs when the app is not installed.
-            var iframe = document.createElement('iframe');
-            iframe.setAttribute('title', 'NewsLight app handoff');
-            iframe.setAttribute('style', 'position:fixed;width:1px;height:1px;border:0;opacity:0;pointer-events:none;bottom:0;right:0');
-            iframe.setAttribute('src', appLink);
-            document.body.appendChild(iframe);
-            var fallbackMs = 2200;
-            setTimeout(function () {
-              try {
-                if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
-              } catch (err) {}
-              document.removeEventListener('visibilitychange', onVisibility);
-              if (!appOpened) window.location.assign(store);
-            }, fallbackMs);
-          });
         }
 
         function escapeHtml(str) {
